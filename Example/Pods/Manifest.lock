@@ -1,0 +1,16 @@
+PODS:
+  - A2ATextField (0.1.0)
+
+DEPENDENCIES:
+  - A2ATextField (from `../`)
+
+EXTERNAL SOURCES:
+  A2ATextField:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  A2ATextField: fd4a1bbfe3d1cd0bcabf2bffac6fa1a778624da7
+
+PODFILE CHECKSUM: 5523235a1d1c0ede8f62917f2d030b0c3c78926f
+
+COCOAPODS: 1.5.3

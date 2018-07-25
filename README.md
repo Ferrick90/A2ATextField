@@ -5,6 +5,16 @@
 [![License](https://img.shields.io/cocoapods/l/A2ATextField.svg?style=flat)](https://cocoapods.org/pods/A2ATextField)
 [![Platform](https://img.shields.io/cocoapods/p/A2ATextField.svg?style=flat)](https://cocoapods.org/pods/A2ATextField)
 
+UITextField class to float the Placeholder and validate the text while editing.
+
+## Features
+- [x] Floating effect in placeholder
+- [x] Change border style to bottom line
+- [x] Change placeholder active and inactive text color
+- [x] Mandatory option
+- [x] Change mandatory error message
+- [x] Validate the text while editing
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

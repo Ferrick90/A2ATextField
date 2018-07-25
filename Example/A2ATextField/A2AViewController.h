@@ -7,7 +7,11 @@
 //
 
 @import UIKit;
+#import "A2ATextField.h"
 
-@interface A2AViewController : UIViewController
+@interface A2AViewController : UIViewController <A2ATextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet A2ATextField *userTextField;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @end
