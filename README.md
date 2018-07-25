@@ -33,35 +33,33 @@ pod 'A2ATextField'
 ## How to use
 ####  Set placeholder
 ```
-self.textField.placeholder = @"Name*";
+self.textField.placeholder = @"Name*"; // Default is nil
 ```
 
 #### Change border style to bottom line
 Default value is NO
 ```
-self.textField.bottomBorderOnly = YES;
+self.textField.bottomBorderOnly = YES; // Default is NO
 ```
 
 #### Change the placeholder active color
 ```
-self.textField.placeholderActiveColor = [UIColor greenColor];
+self.textField.placeholderActiveColor = [UIColor colorWithRed:38/255.0 green:108/255.0 blue:194/255.0 alpha:1.0];
 ```
 
 #### Change the placeholder inactive color
 ```
-self.textField.placeholderInactiveColor = [UIColor greenColor];
+self.textField.placeholderInactiveColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
 ```
 
 #### Set mandatory
-Default is NO
 ```
-self.textField.isMandatory = YES;
+self.textField.isMandatory = YES; // Default value is NO
 ```
 
 #### Change mandatory error message
-Default is Error
 ```
-self.textField.mandatoryText = @"Please input a valid name";
+self.textField.mandatoryText = @"Please input a valid name"; // Default value is Error
 ```
 
 ## Author
