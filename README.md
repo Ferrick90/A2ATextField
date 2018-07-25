@@ -30,6 +30,27 @@ it, simply add the following line to your Podfile:
 pod 'A2ATextField'
 ```
 
+## How to use
+### Placeholder
+```
+self.textField.placeholder = @"Name*";
+```
+
+### Change border style to bottom line
+```
+self.textField.bottomBorderOnly = YES;
+```
+
+### Change the placeholder active color
+```
+self.textField.placeholderActiveColor = [UIColor greenColor];
+```
+
+### Change the placeholder inactive color
+```
+self.textField.pplaceholderInactiveColor = [UIColor greenColor];
+```
+
 ## Author
 
 Ferrick90, ferrick1990@hotmail.com
