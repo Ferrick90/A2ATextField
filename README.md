@@ -37,7 +37,6 @@ self.textField.placeholder = @"Name*"; // Default is nil
 ```
 
 #### Change border style to bottom line
-Default value is NO
 ```
 self.textField.bottomBorderOnly = YES; // Default is NO
 ```
@@ -61,6 +60,22 @@ self.textField.isMandatory = YES; // Default value is NO
 ```
 self.textField.mandatoryText = @"Please input a valid name"; // Default value is Error
 ```
+
+#### Validate the text while editing
+##### 1) Set delegate
+```
+self.textField.delegate = self;
+```
+
+##### 2) Set validationBlock
+```
+- (void) validationBlock:(UITextField *)textField {
+	if (textField.text.length < 6 && textField.tag == 1) {
+		[self.textField errorMessage:@"Passwords must be at least 8 characters in length"];
+	}
+}
+```
+
 
 ## Author
 
