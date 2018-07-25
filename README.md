@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/A2ATextField.svg?style=flat)](https://cocoapods.org/pods/A2ATextField)
 [![Platform](https://img.shields.io/cocoapods/p/A2ATextField.svg?style=flat)](https://cocoapods.org/pods/A2ATextField)
 
-UITextField class to float the Placeholder and validate the text while editing.
+A2ATextField class to float the Placeholder and validate the text while editing.
 
 ## Features
 - [x] Floating effect in placeholder
