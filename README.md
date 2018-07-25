@@ -12,7 +12,8 @@ UITextField class to float the Placeholder and validate the text while editing.
 - [x] Change border style to bottom line
 - [x] Change placeholder active and inactive text color
 - [x] Mandatory option
-- [x] Change mandatory error message
+- [x] Change mandatory error text
+- [x] Show error text
 - [x] Validate the text while editing
 
 ## Example
@@ -61,6 +62,11 @@ self.textField.isMandatory = YES; // Default value is NO
 self.textField.mandatoryText = @"Please input a valid name"; // Default value is Error
 ```
 
+#### Show error text
+```
+[self.textField errorMessage:@"Please input a valid name"];
+```
+
 #### Validate the text while editing
 ##### 1) Set delegate
 ```
@@ -75,7 +81,6 @@ self.textField.delegate = self;
 	}
 }
 ```
-
 
 ## Author
 
