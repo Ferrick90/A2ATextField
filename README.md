@@ -31,12 +31,12 @@ pod 'A2ATextField'
 ```
 
 ## How to use
-### Placeholder
+#### Placeholder
 ```
 self.textField.placeholder = @"Name*";
 ```
 
-### Change border style to bottom line
+#### Change border style to bottom line
 ```
 self.textField.bottomBorderOnly = YES;
 ```
