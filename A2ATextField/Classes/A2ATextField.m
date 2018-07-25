@@ -18,6 +18,8 @@
 	NSLayoutConstraint *bottomLabelTopConstraint;
 	UIColor *bottomBorderColor;
 	UIColor *errorColor;
+	UIColor *placeholderTextActiveColor;
+	UIColor *placeholderTextInactiveColor;
 	BOOL error;
 	BOOL bottomBorder;
 }
@@ -26,8 +28,6 @@
 @implementation A2ATextField
 
 @synthesize delegate = _delegate;
-@synthesize placeholderActiveColor = _placeholderActiveColor;
-@synthesize placeholderInactiveColor = _placeholderInactiveColor;
 @synthesize isMandatory = _isMandatory;
 @synthesize mandatoryText = _mandatoryText;
 
@@ -54,13 +54,13 @@
 	errorColor = [UIColor colorWithRed:225.0/255.0 green:51.0/255.0 blue:40.0/255.0 alpha:1.0];
 	bottomBorderColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:0.4];
 	
-	self.placeholderActiveColor = [UIColor colorWithRed:38/255.0 green:108/255.0 blue:194/255.0 alpha:1.0];
-	self.placeholderInactiveColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
+	placeholderTextActiveColor = [UIColor colorWithRed:38/255.0 green:108/255.0 blue:194/255.0 alpha:1.0];
+	placeholderTextInactiveColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
 	
 	placeholderLabel = [[UILabel alloc] init];
 	placeholderLabel.text = @"";
 	placeholderLabel.font = [UIFont systemFontOfSize:14.0];
-	placeholderLabel.textColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
+	placeholderLabel.textColor = placeholderTextInactiveColor;
 	placeholderLabel.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview: placeholderLabel];
 	
@@ -113,6 +113,14 @@
 	placeholderLabel.text = placeholder;
 }
 
+- (void) setPlaceholderActiveColor:(UIColor *)placeholderActiveColor {
+	placeholderTextActiveColor = placeholderActiveColor;
+}
+
+- (void) setPlaceholderInactiveColor:(UIColor *)placeholderInactiveColor {
+	placeholderTextInactiveColor = placeholderInactiveColor;
+	placeholderLabel.textColor = placeholderInactiveColor;
+}
 
 - (void) setBottomLabelFont:(UIFont *)bottomLabelFont {
 	bottomLabel.font = bottomLabelFont;
@@ -269,7 +277,7 @@
 
 - (void) runDidBeginAnimation {
 	[UIView animateWithDuration:0.3 animations:^{
-		self->placeholderLabel.textColor = self.placeholderActiveColor;
+		self->placeholderLabel.textColor = self->placeholderTextActiveColor;
 		
 		if (self->bottomBorder == YES) {
 			self->placeholderLabelTopConstraint.constant = -(self.font.pointSize + 25);
@@ -285,7 +293,7 @@
 
 - (void) runDidEndAnimation {
 	[UIView animateWithDuration:0.3 animations:^{
-		self->placeholderLabel.textColor = self.placeholderInactiveColor;
+		self->placeholderLabel.textColor = self->placeholderTextInactiveColor;
 		
 		if (self->bottomBorder == YES) {
 			self->placeholderLabelTopConstraint.constant = 0;
@@ -301,14 +309,16 @@
 - (void) runDidTextBeginAnimation {
 	if (error == NO) {
 		if (self.text.length > 0) {
+			
+			NSLog(@"123");
 			void (^hideBlock)(void) = ^{
-				self->placeholderLabel.textColor = self.placeholderActiveColor;
+				self->placeholderLabel.textColor = self->placeholderTextActiveColor;
 				self->bottomLabel.hidden = YES;
 				
 				if (self->bottomBorder == YES) {
-					self->bottomLayer.borderColor = self.placeholderActiveColor.CGColor;
+					self->bottomLayer.borderColor = self->placeholderTextActiveColor.CGColor;
 				} else {
-					self.layer.borderColor = self.placeholderActiveColor.CGColor;
+					self.layer.borderColor = self->placeholderTextActiveColor.CGColor;
 				}
 			};
 			
@@ -322,9 +332,9 @@
 				self->bottomLabel.hidden = YES;
 				
 				if (self->bottomBorder == YES) {
-					self->bottomLayer.borderColor = self.placeholderActiveColor.CGColor;
+					self->bottomLayer.borderColor = self->placeholderTextActiveColor.CGColor;
 				} else {
-					self.layer.borderColor = self.placeholderActiveColor.CGColor;
+					self.layer.borderColor = self->placeholderTextActiveColor.CGColor;
 				}
 			};
 			
@@ -334,19 +344,29 @@
 							animations:hideBlock
 							completion:nil];
 		}
+	} else {
+		void (^hideBlock)(void) = ^{
+			self->bottomLabel.hidden = YES;
+			
+			if (self->bottomBorder == YES) {
+				self->bottomLayer.borderColor = self->placeholderTextActiveColor.CGColor;
+			} else {
+				self.layer.borderColor = self->placeholderTextActiveColor.CGColor;
+			}
+		};
+		
+		[UIView transitionWithView:self
+						  duration:0.3f
+						   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
+						animations:hideBlock
+						completion:nil];
 	}
 }
 
 - (void) runDidTextEndAnimation {
 	
-	if (self.delegate != nil){
-		if ([self.delegate respondsToSelector:@selector(validationBlock:)]) {
-			[self.delegate validationBlock:self];
-		}
-	}
-	
 	void (^hideBlock)(void) = ^{
-		self->placeholderLabel.textColor = self.placeholderInactiveColor;
+		self->placeholderLabel.textColor = self->placeholderTextInactiveColor;
 		
 		if (self->bottomBorder == YES) {
 			self->bottomLayer.borderColor = self->bottomBorderColor.CGColor;
@@ -360,6 +380,13 @@
 					   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
 					animations:hideBlock
 					completion:nil];
+	
+	if (self.delegate != nil){
+		if ([self.delegate respondsToSelector:@selector(validationBlock:)]) {
+			[self.delegate validationBlock:self];
+		}
+	}
+	
 }
 
 @end
