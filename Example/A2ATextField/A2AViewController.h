@@ -12,6 +12,8 @@
 @interface A2AViewController : UIViewController <A2ATextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet A2ATextField *userTextField;
+@property (weak, nonatomic) IBOutlet A2ATextField *passTextField;
+@property (weak, nonatomic) IBOutlet A2ATextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @end
