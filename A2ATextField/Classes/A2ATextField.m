@@ -36,6 +36,7 @@
 	
 	if (self) {
 		[self setupView];
+		self.placeholder = self.placeholder;
 	}
 	
 	return self;
@@ -58,7 +59,7 @@
 	placeholderTextInactiveColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
 	
 	placeholderLabel = [[UILabel alloc] init];
-	placeholderLabel.text = @"";
+	//placeholderLabel.text = @"Name*";
 	placeholderLabel.font = [UIFont systemFontOfSize:14.0];
 	placeholderLabel.textColor = placeholderTextInactiveColor;
 	placeholderLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -309,8 +310,7 @@
 - (void) runDidTextBeginAnimation {
 	if (error == NO) {
 		if (self.text.length > 0) {
-			
-			NSLog(@"123");
+	
 			void (^hideBlock)(void) = ^{
 				self->placeholderLabel.textColor = self->placeholderTextActiveColor;
 				self->bottomLabel.hidden = YES;
