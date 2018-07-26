@@ -63,8 +63,6 @@
 	self.emailTextField.rightView = emailSuccessButton;
 	self.emailTextField.rightViewMode = UITextFieldViewModeAlways;
 	
-	
-	//NSLog(@"result : %@", self.userTextField.text);
 }
 
 - (void)didReceiveMemoryWarning
