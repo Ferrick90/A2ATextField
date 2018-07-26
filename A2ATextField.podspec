@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A2ATextField is subclass of UITextfield class that float the Placeholder and validate the text while editing.
                        DESC
 
   s.homepage         = 'https://github.com/Ferrick90/A2ATextField'

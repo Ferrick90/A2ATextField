@@ -37,6 +37,7 @@
 	nameSuccessButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[nameSuccessButton setImage:[UIImage imageNamed:@"success"] forState:UIControlStateNormal];
 	nameSuccessButton.frame = CGRectMake(0, 0, 30, self.userTextField.frame.size.height);
+	nameSuccessButton.imageEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2);
 	nameSuccessButton.hidden = YES;
 	self.userTextField.rightView = nameSuccessButton;
 	self.userTextField.rightViewMode = UITextFieldViewModeAlways;
@@ -59,6 +60,7 @@
 	emailSuccessButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[emailSuccessButton setImage:[UIImage imageNamed:@"success"] forState:UIControlStateNormal];
 	emailSuccessButton.frame = CGRectMake(0, 0, 30, self.userTextField.frame.size.height);
+	emailSuccessButton.imageEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2);
 	emailSuccessButton.hidden = YES;
 	self.emailTextField.rightView = emailSuccessButton;
 	self.emailTextField.rightViewMode = UITextFieldViewModeAlways;
