@@ -15,6 +15,9 @@ A2ATextField class to float the Placeholder and validate the text while editing.
 - [x] Show and change error text
 - [x] Validate the text while editing
 
+## Preview
+![Alt text](Example/preview.gif "Title")
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
