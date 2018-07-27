@@ -116,7 +116,7 @@ self.textField.placeholder = "Name" // Default is nil
 
 #### Change border style to bottom line
 ```
-self.textField.bottomBorderOnly = true // Default is NO
+self.textField.bottomBorderOnly = true // Default is false
 ```
 
 #### Change the placeholder active color
@@ -137,7 +137,7 @@ self.textField.style = email // Default value is A2ATextFieldStyle.none
 
 #### Set mandatory
 ```
-self.textField.isMandatory = true // Default value is NO
+self.textField.isMandatory = true // Default value is false
 ```
 
 #### Change mandatory error message
