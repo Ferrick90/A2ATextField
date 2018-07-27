@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36D391FC210B0D3400AE0599 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D391FB210B0D3400AE0599 /* ViewController.swift */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		36452AA87894F44F4FABFA29 /* Pods-A2ATextField_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A2ATextField_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-A2ATextField_Tests/Pods-A2ATextField_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		36D391F8210B0D0800AE0599 /* A2ATextField_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "A2ATextField_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		36D391FB210B0D3400AE0599 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* A2ATextField_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A2ATextField_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,8 +139,10 @@
 				6003F59D195388D20070C39A /* A2AAppDelegate.m */,
 				6003F5A5195388D20070C39A /* A2AViewController.h */,
 				6003F5A6195388D20070C39A /* A2AViewController.m */,
+				36D391FB210B0D3400AE0599 /* ViewController.swift */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				36D391F8210B0D0800AE0599 /* A2ATextField_Example-Bridging-Header.h */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -249,6 +254,7 @@
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = AKE35ULBJ4;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 					6003F5AD195388D20070C39A = {
@@ -361,6 +367,7 @@
 			files = (
 				6003F59E195388D20070C39A /* A2AAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* A2AViewController.m in Sources */,
+				36D391FC210B0D3400AE0599 /* ViewController.swift in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,6 +496,7 @@
 			baseConfigurationReference = BB0CFC8BF8FB888C2A372D2F /* Pods-A2ATextField_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AKE35ULBJ4;
@@ -496,10 +504,14 @@
 				GCC_PREFIX_HEADER = "A2ATextField/A2ATextField-Prefix.pch";
 				INFOPLIST_FILE = "A2ATextField/A2ATextField-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "A2ATextField/A2ATextField_Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -509,6 +521,7 @@
 			baseConfigurationReference = BA75FDD518315BD8E2D2C8F4 /* Pods-A2ATextField_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AKE35ULBJ4;
@@ -516,10 +529,13 @@
 				GCC_PREFIX_HEADER = "A2ATextField/A2ATextField-Prefix.pch";
 				INFOPLIST_FILE = "A2ATextField/A2ATextField-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "A2ATextField/A2ATextField_Example-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -528,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 36452AA87894F44F4FABFA29 /* Pods-A2ATextField_Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -552,6 +569,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BA3CBC9708A20624D8782AEE /* Pods-A2ATextField_Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

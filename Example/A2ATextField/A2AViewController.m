@@ -85,8 +85,6 @@
 	self.emailTextField.style = A2ATextFieldStyleEmail;
 	
 	self.successLabel.hidden = YES;
-	
-	
 }
 
 - (void)didReceiveMemoryWarning

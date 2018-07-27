@@ -34,6 +34,7 @@ pod 'A2ATextField'
 ```
 
 ## How to use
+### Objective-C
 #### Set placeholder
 ```
 self.textField.placeholder = @"Name*"; // Default is nil
@@ -73,7 +74,7 @@ self.textField.errorText = @"Please input a valid name"; // Default value is Err
 #### Show error text
 ##### 1) show default error text
 ```
-[self.userTextField error];
+[self.textField error];
 ```
 ##### 2) show cutom error text
 ```
@@ -101,6 +102,80 @@ if (!self.textField.validationSuccess) {
 }
 
 if (status == YES) {
+	// success (do somethings like call api or etc.)
+} else {
+	// error
+}	
+```
+
+### Swift
+#### Set placeholder
+```
+self.textField.placeholder = "Name" // Default is nil
+```
+
+#### Change border style to bottom line
+```
+self.textField.bottomBorderOnly = true // Default is NO
+```
+
+#### Change the placeholder active color
+```
+self.textField.placeholderActiveColor = UIColor(red: 38/255, green: 108/255, blue: 194/255, alpha: 1.0)
+```
+
+#### Change the placeholder inactive color
+```
+self.textField.placeholderInactiveColor = UIColor.gray.withAlphaComponent(0.7)
+```
+
+#### Set Style
+```
+// either A2ATextFieldStyle.email or A2ATextFieldStyle.none
+self.textField.style = email // Default value is A2ATextFieldStyle.none
+```
+
+#### Set mandatory
+```
+self.textField.isMandatory = true // Default value is NO
+```
+
+#### Change mandatory error message
+```
+self.textField.errorText = "Please input a valid name" // Default value is Error
+```
+
+#### Show error text
+##### 1) show default error text
+```
+self.textField.error()
+```
+##### 2) show cutom error text
+```
+self.userTextField.error("Please input a valid name")
+```
+
+#### Validate the text while editing
+```
+self.textField.setValidationBlock { (textField) -> Bool in
+	if ((textField?.text?.count)! < 8) {
+		self.passTextField.error()
+		return false
+	}
+
+	return true
+}
+```
+
+#### Validation Success
+```
+var status: Bool = true
+
+if (!self.textField.validationSuccess()) {
+	status = false
+}
+
+if (status == true) {
 	// success (do somethings like call api or etc.)
 } else {
 	// error

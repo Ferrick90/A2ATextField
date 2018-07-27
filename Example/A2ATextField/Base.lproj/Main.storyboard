@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="wQg-tq-qST">
             <objects>
-                <viewController id="whP-gf-Uak" customClass="A2AViewController" sceneMemberID="viewController">
+                <viewController id="whP-gf-Uak" customClass="ViewController" customModule="A2ATextField_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uEw-UM-LJ8"/>
                         <viewControllerLayoutGuide type="bottom" id="Mvr-aV-6Um"/>
@@ -89,7 +89,7 @@
                                 </constraints>
                                 <state key="normal" title="Submit"/>
                                 <connections>
-                                    <action selector="submitAction:" destination="whP-gf-Uak" eventType="touchUpInside" id="rMP-tl-y64"/>
+                                    <action selector="submitAction:" destination="whP-gf-Uak" eventType="touchUpInside" id="fnv-rv-X9m"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -118,8 +118,8 @@
                         <outlet property="addressTextField" destination="c1d-kv-9NJ" id="dM4-dX-6il"/>
                         <outlet property="emailTextField" destination="4AG-L0-WXg" id="6iK-IC-Sji"/>
                         <outlet property="passTextField" destination="CI9-Id-GGT" id="oS9-h9-eHg"/>
-                        <outlet property="submitBtn" destination="GMA-hC-FzV" id="9rh-zR-q5w"/>
-                        <outlet property="successLabel" destination="gP5-cm-jiD" id="NjJ-kE-b6p"/>
+                        <outlet property="submitBtn" destination="GMA-hC-FzV" id="qKm-Yn-m4q"/>
+                        <outlet property="successLabel" destination="gP5-cm-jiD" id="PhJ-QU-oHz"/>
                         <outlet property="userTextField" destination="3tb-aO-iXn" id="ZqD-Sg-j9M"/>
                     </connections>
                 </viewController>
