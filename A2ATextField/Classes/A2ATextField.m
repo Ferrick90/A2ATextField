@@ -9,7 +9,6 @@
 
 
 @interface A2ATextField () {
-	id<A2ATextFieldDelegate> delegate;
 	CALayer *bottomLayer;
 	UILabel *placeholderLabel;
 	UILabel *bottomLabel;
@@ -22,14 +21,14 @@
 	UIColor *placeholderTextInactiveColor;
 	BOOL error;
 	BOOL bottomBorder;
+	A2AValidationBlock a2aBlock;
 }
 @end
 
 @implementation A2ATextField
 
-@synthesize delegate = _delegate;
 @synthesize isMandatory = _isMandatory;
-@synthesize mandatoryText = _mandatoryText;
+@synthesize errorText = _errorText;
 
 - (id) initWithCoder:(NSCoder *)aDecoder {
 	self = [super initWithCoder:aDecoder];
@@ -66,7 +65,7 @@
 	[self addSubview: placeholderLabel];
 	
 	bottomLabel = [[UILabel alloc] init];
-	bottomLabel.text = @"Please input a valid name";
+	//bottomLabel.text = @"Please input a valid name";
 	bottomLabel.font = [UIFont systemFontOfSize:11.0];
 	bottomLabel.textColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
 	bottomLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -136,17 +135,26 @@
 		bottomLayer = [CALayer layer];
 		bottomLayer.borderColor = bottomBorderColor.CGColor;
 		bottomLayer.borderWidth = 1.0;
-		bottomLayer.frame = CGRectMake(0, self.frame.size.height - 6, self.frame.size.width, 1.0);
+		bottomLayer.frame = CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1.0);
 		[self.layer addSublayer: bottomLayer];
 		
 		placeholderLabelLeftConstraint.constant = 0;
-		bottomLabelTopConstraint.constant = 11.0;
+		bottomLabelTopConstraint.constant = 3.0;
 	} else {
 		[self initLayer];
 		
 		placeholderLabelLeftConstraint.constant = 6.0;
 		bottomLabelTopConstraint.constant = 3.0;
 	}
+}
+
+- (void) setStyle:(A2ATextFieldStyle)style
+{
+	_style = style;
+}
+
+- (void) setValidationBlock:(A2AValidationBlock)block {
+	a2aBlock = block;
 }
 
 #pragma mark - Init BorderLayer
@@ -180,14 +188,19 @@
 
 #pragma mark - Get Method
 
-- (void) errorMessage:(NSString *)errorText {
-
+- (void) error {
+	
 	error = YES;
 	
 	void (^errorBlock)(void) = ^{
 		self->bottomLabel.hidden = NO;
-		self->bottomLabel.text = errorText;
 		self->bottomLabel.textColor = self->errorColor;
+		
+		if (self.errorText.length == 0) {
+			self->bottomLabel.text = @"Error";
+		} else {
+			self->bottomLabel.text = self.errorText;
+		}
 		
 		if (self->bottomBorder == YES) {
 			self->bottomLayer.borderColor = self->errorColor.CGColor;
@@ -196,11 +209,26 @@
 		}
 	};
 	
-	[UIView transitionWithView:self
-					  duration:0.3f
-					   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
-					animations:errorBlock
-					completion:nil];
+	[self performAnimation:errorBlock];
+}
+
+- (void) error:(NSString *)message {
+
+	error = YES;
+	
+	void (^errorBlock)(void) = ^{
+		self->bottomLabel.hidden = NO;
+		self->bottomLabel.textColor = self->errorColor;
+		self->bottomLabel.text = message;
+		
+		if (self->bottomBorder == YES) {
+			self->bottomLayer.borderColor = self->errorColor.CGColor;
+		} else {
+			self.layer.borderColor = self->errorColor.CGColor;
+		}
+	};
+	
+	[self performAnimation:errorBlock];
 }
 
 #pragma mark - TextField Target Method
@@ -213,7 +241,7 @@
 - (IBAction) textFieldEdittingDidEndInternal:(UITextField *)sender
 {
 	if (self.isMandatory == YES) {
-		[self validationMandotry];
+		[self validateMandotry];
 	} else {
 		[self runDidTextEndAnimation];
 	}
@@ -236,16 +264,53 @@
 
 #pragma mark - Validation Method
 
-- (void) validationMandotry {
+- (void) validateMandotry {
 	if (self.text.length == 0) {
-		if (self.mandatoryText.length == 0) {
-			[self errorMessage: @"Error"];
+		if (self.errorText.length == 0) {
+			[self error: @"Error"];
 		} else {
-			[self errorMessage: self.mandatoryText];
+			[self error: self.errorText];
 		}
+		
+		//if (a2aBlock) {
+		//	a2aBlock(self);
+		//} else if (self.style == A2ATextFieldStyleEmail) {
+		//	if (![self validateEmailWithString: self.text]) {
+		//		[self error];
+		//	}
+		//}
+	
 	} else {
 		[self runDidTextEndAnimation];
 	}
+}
+
+- (BOOL) validateEmailWithString:(NSString*)checkString {
+	NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
+	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+	if (![emailTest evaluateWithObject:checkString]) {
+		return NO;
+	}
+	
+	return YES;
+}
+
+- (BOOL) validationSuccess {
+	
+	BOOL status = YES;
+	
+	if (a2aBlock) {
+		if (!a2aBlock(self)){
+			status = NO;
+		}
+	} else if (self.style == A2ATextFieldStyleEmail) {
+		if (![self validateEmailWithString: self.text]) {
+			[self error];
+			status = NO;
+		}
+	}
+	
+	return status;
 }
 
 
@@ -267,14 +332,18 @@
 		}
 	};
 	
-	[UIView transitionWithView:self
-					  duration:0.3f
-					   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
-					animations:removeErrorBlock
-					completion:nil];
+	[self performAnimation:removeErrorBlock];
 }
 
 #pragma mark - Animation
+
+- (void) performAnimation: (void (^)(void)) block {
+	[UIView transitionWithView:self
+					  duration:0.3f
+					   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
+					animations:block
+					completion:nil];
+}
 
 - (void) runDidBeginAnimation {
 	[UIView animateWithDuration:0.3 animations:^{
@@ -322,11 +391,7 @@
 				}
 			};
 			
-			[UIView transitionWithView:self
-							  duration:0.3f
-							   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
-							animations:hideBlock
-							completion:nil];
+			[self performAnimation:hideBlock];
 		} else {
 			void (^hideBlock)(void) = ^{
 				self->bottomLabel.hidden = YES;
@@ -338,28 +403,8 @@
 				}
 			};
 			
-			[UIView transitionWithView:self
-							  duration:0.3f
-							   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
-							animations:hideBlock
-							completion:nil];
+			[self performAnimation:hideBlock];
 		}
-	} else {
-		void (^hideBlock)(void) = ^{
-			self->bottomLabel.hidden = YES;
-			
-			if (self->bottomBorder == YES) {
-				self->bottomLayer.borderColor = self->placeholderTextActiveColor.CGColor;
-			} else {
-				self.layer.borderColor = self->placeholderTextActiveColor.CGColor;
-			}
-		};
-		
-		[UIView transitionWithView:self
-						  duration:0.3f
-						   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
-						animations:hideBlock
-						completion:nil];
 	}
 }
 
@@ -375,15 +420,14 @@
 		}
 	};
 	
-	[UIView transitionWithView:self
-					  duration:0.3f
-					   options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionCrossDissolve
-					animations:hideBlock
-					completion:nil];
+	[self performAnimation:hideBlock];
 	
-	if (self.delegate != nil){
-		if ([self.delegate respondsToSelector:@selector(validationBlock:)]) {
-			[self.delegate validationBlock:self];
+	
+	if (a2aBlock) {
+		a2aBlock(self);
+	} else if (self.style == A2ATextFieldStyleEmail) {
+		if (![self validateEmailWithString: self.text]) {
+			[self error];
 		}
 	}
 	

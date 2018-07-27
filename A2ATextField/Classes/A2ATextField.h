@@ -9,23 +9,28 @@
 
 @class A2ATextField;
 
-@protocol A2ATextFieldDelegate <UITextFieldDelegate>
-@optional
-- (void)validationBlock:(UITextField *)textField;
-@end
+typedef NS_ENUM(NSInteger, A2ATextFieldStyle)
+{
+	A2ATextFieldStyleEmail,         //Default email validation
+	A2ATextFieldStyleNone,          //Default style
+};
+
+typedef BOOL (^A2AValidationBlock)(A2ATextField *textField);
 
 @interface A2ATextField: UITextField
 
-@property (nonatomic, assign) id<A2ATextFieldDelegate> delegate;
 @property (nonatomic, strong) IBInspectable UIColor *placeholderActiveColor;
 @property (nonatomic, strong) IBInspectable UIColor *placeholderInactiveColor;
+@property (nonatomic, strong) UIFont *bottomLabelFont;
 @property (nonatomic, assign) IBInspectable BOOL bottomBorderOnly;
 @property (nonatomic, assign) IBInspectable BOOL isMandatory;
-@property (nonatomic, copy) IBInspectable NSString *mandatoryText;
+@property (nonatomic, copy) IBInspectable NSString *errorText;
+@property (nonatomic, assign) A2ATextFieldStyle style;
 
-@property (nonatomic, strong) UIFont *bottomLabelFont;
-
-- (void) errorMessage: (NSString *) errorText;
+- (void) error;
+- (void) error: (NSString *) message;
+- (void) setValidationBlock: (A2AValidationBlock) block;
+- (BOOL) validationSuccess;
 
 @end
 
