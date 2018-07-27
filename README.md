@@ -89,6 +89,21 @@ self.textField.errorText = @"Please input a valid name"; // Default value is Err
 }];
 ```
 
+#### Validation Success
+```
+BOOL status = YES;
+
+if (!self.userTextField.validationSuccess) {
+	status = NO;
+}
+
+if (status == YES) {
+	// success (do somethings like call api or etc.)
+} else {
+	// error
+}	
+```
+
 ## Author
 
 Ferrick90, ferrick1990@hotmail.com
