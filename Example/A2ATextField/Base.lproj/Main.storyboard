@@ -23,65 +23,99 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CI9-Id-GGT" customClass="A2ATextField">
-                                <rect key="frame" x="36" y="135" width="303" height="30"/>
+                                <rect key="frame" x="36" y="130" width="303" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4SE-Vc-nJB"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isMandatory" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorderOnly" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mandatoryText" value="Please input a valid password"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="errorText" value="Passwords must be at least 8 characters in length"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3tb-aO-iXn" customClass="A2ATextField">
+                                <rect key="frame" x="36" y="65" width="303" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ip6-Ij-h19"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorderOnly" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMandatory" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="errorText" value="Please input a valid name"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4AG-L0-WXg" customClass="A2ATextField">
+                                <rect key="frame" x="36" y="195" width="303" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Dns-iy-SLC"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMandatory" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorderOnly" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="errorText" value="Invalid email format"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gP5-cm-jiD">
+                                <rect key="frame" x="36" y="378.5" width="303" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c1d-kv-9NJ" customClass="A2ATextField">
+                                <rect key="frame" x="36" y="260" width="303" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="YoC-NP-44j"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorderOnly" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMA-hC-FzV">
-                                <rect key="frame" x="162.5" y="318" width="49" height="30"/>
+                                <rect key="frame" x="163" y="318.5" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitAction:" destination="whP-gf-Uak" eventType="touchUpInside" id="rMP-tl-y64"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3tb-aO-iXn" customClass="A2ATextField">
-                                <rect key="frame" x="36" y="65" width="303" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorderOnly" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMandatory" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mandatoryText" value="Please input a valid name"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4AG-L0-WXg" customClass="A2ATextField">
-                                <rect key="frame" x="36" y="205" width="303" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isMandatory" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorderOnly" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="mandatoryText" value="Please input a valid email"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="4AG-L0-WXg" secondAttribute="trailing" constant="20" id="3DV-PM-h5N"/>
                             <constraint firstItem="GMA-hC-FzV" firstAttribute="centerY" secondItem="TpU-gO-2f1" secondAttribute="centerY" id="5Ln-gY-Bpa"/>
+                            <constraint firstItem="gP5-cm-jiD" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="20" id="71S-71-l8S"/>
+                            <constraint firstItem="c1d-kv-9NJ" firstAttribute="top" secondItem="4AG-L0-WXg" secondAttribute="bottom" constant="35" id="C2o-bl-jtR"/>
                             <constraint firstItem="3tb-aO-iXn" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="45" id="EoF-sc-3tH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CI9-Id-GGT" secondAttribute="trailing" constant="20" id="Knm-70-yU0"/>
                             <constraint firstItem="CI9-Id-GGT" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="20" id="Nqf-Ne-hpk"/>
-                            <constraint firstItem="CI9-Id-GGT" firstAttribute="top" secondItem="3tb-aO-iXn" secondAttribute="bottom" constant="40" id="V6D-S4-y1n"/>
+                            <constraint firstItem="CI9-Id-GGT" firstAttribute="top" secondItem="3tb-aO-iXn" secondAttribute="bottom" constant="35" id="V6D-S4-y1n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gP5-cm-jiD" secondAttribute="trailing" constant="20" id="VCQ-jC-Zom"/>
+                            <constraint firstItem="gP5-cm-jiD" firstAttribute="top" secondItem="GMA-hC-FzV" secondAttribute="bottom" constant="30" id="Yoc-Qk-aql"/>
                             <constraint firstItem="3tb-aO-iXn" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="20" id="btt-8B-l0Z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3tb-aO-iXn" secondAttribute="trailing" constant="20" id="dX1-4C-SXW"/>
-                            <constraint firstItem="4AG-L0-WXg" firstAttribute="top" secondItem="CI9-Id-GGT" secondAttribute="bottom" constant="40" id="feY-tT-1tx"/>
+                            <constraint firstItem="4AG-L0-WXg" firstAttribute="top" secondItem="CI9-Id-GGT" secondAttribute="bottom" constant="35" id="feY-tT-1tx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="c1d-kv-9NJ" secondAttribute="trailing" constant="20" id="pXc-HC-5Ar"/>
                             <constraint firstItem="4AG-L0-WXg" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="20" id="qA9-KQ-eRE"/>
-                            <constraint firstItem="GMA-hC-FzV" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="vT9-1M-ZIJ"/>
+                            <constraint firstItem="GMA-hC-FzV" firstAttribute="centerX" secondItem="c1d-kv-9NJ" secondAttribute="centerX" id="wRR-eW-5VM"/>
+                            <constraint firstItem="c1d-kv-9NJ" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="20" id="x8X-xm-MOv"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="4AG-L0-WXg" id="6iK-IC-Sji"/>
                         <outlet property="passTextField" destination="CI9-Id-GGT" id="oS9-h9-eHg"/>
                         <outlet property="submitBtn" destination="GMA-hC-FzV" id="9rh-zR-q5w"/>
+                        <outlet property="successLabel" destination="gP5-cm-jiD" id="NjJ-kE-b6p"/>
                         <outlet property="userTextField" destination="3tb-aO-iXn" id="ZqD-Sg-j9M"/>
                     </connections>
                 </viewController>

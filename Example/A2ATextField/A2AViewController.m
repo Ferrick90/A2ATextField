@@ -31,7 +31,6 @@
 	//self.userTextField.placeholderInactiveColor = [UIColor greenColor];
 	//self.userTextField.isMandatory = YES;
 	//self.userTextField.mandatoryText = @"Please input a valid name";
-	self.userTextField.delegate = self;
 	
 	// userTextField custom right button
 	nameSuccessButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -42,8 +41,18 @@
 	self.userTextField.rightView = nameSuccessButton;
 	self.userTextField.rightViewMode = UITextFieldViewModeAlways;
 	
-	// passTextField
-	self.passTextField.delegate = self;
+	// userTextField validation
+	[self.userTextField setValidationBlock:^(A2ATextField *textField) {
+		if (textField.text.length > 0) {
+			self->nameSuccessButton.hidden = NO;
+			return YES;
+		}
+		
+		self->nameSuccessButton.hidden = YES;
+		[self.userTextField error];
+		
+		return NO;
+	}];
 	
 	// passTextField custom right button
 	eyeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -53,8 +62,15 @@
 	self.passTextField.rightView = eyeButton;
 	self.passTextField.rightViewMode = UITextFieldViewModeAlways;
 	
-	// emailTextField
-	self.emailTextField.delegate = self;
+	// passTextField validation
+	[self.passTextField setValidationBlock:^(A2ATextField *textField) {
+		if (textField.text.length < 8) {
+			[self.passTextField error];
+			return NO;
+		}
+		
+		return YES;
+	}];
 	
 	// emailTextField custom right button
 	emailSuccessButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -64,6 +80,12 @@
 	emailSuccessButton.hidden = YES;
 	self.emailTextField.rightView = emailSuccessButton;
 	self.emailTextField.rightViewMode = UITextFieldViewModeAlways;
+	
+	// emailTextField
+	self.emailTextField.style = A2ATextFieldStyleEmail;
+	
+	self.successLabel.hidden = YES;
+	
 	
 }
 
@@ -87,52 +109,26 @@
 	
 	[self.view endEditing:YES];
 	
-	if (self.userTextField.text.length == 0) {
-		[self.userTextField errorMessage:@"Please input a valid name"];
+	BOOL status = YES;
+	
+	if (!self.userTextField.validationSuccess) {
+		status = NO;
 	}
 	
-	if (self.passTextField.text.length == 0) {
-		[self.passTextField errorMessage:@"Please input a valid password"];
+	if (!self.passTextField.validationSuccess) {
+		status = NO;
 	}
 	
-	if (self.emailTextField.text.length == 0) {
-		[self.emailTextField errorMessage:@"Please input a valid email"];
+	if (!self.emailTextField.validationSuccess) {
+		status = NO;
 	}
+	
+	// do somethings like call api or etc.
+	if (status == YES) {
+		self.successLabel.hidden = NO;
+	} else {
+		self.successLabel.hidden = YES;
+	}	
 }
-
-- (void) validationBlock:(UITextField *)textField {
-	
-	if (textField.tag == 1) {
-		if (textField.text.length > 0) {
-			nameSuccessButton.hidden = NO;
-		} else {
-			nameSuccessButton.hidden = YES;
-			[self.userTextField errorMessage:@"Please input a valid name"];
-		}
-	} else if (textField.tag == 2) {
-		if (textField.text.length < 6) {
-			[self.passTextField errorMessage:@"Passwords must be at least 8 characters in length"];
-		}
-	} else if (textField.tag == 3) {
-		if ([self validateEmailWithString: textField.text]) {
-			emailSuccessButton.hidden = NO;
-		} else {
-			emailSuccessButton.hidden = YES;
-			[self.emailTextField errorMessage:@"Invalid email format"];
-		}
-	}
-	
-	//NSLog(@"validation result : %@", textField.text);
-}
-
-- (BOOL) validateEmailWithString:(NSString*)checkString {
-	BOOL stricterFilter = NO;
-	NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
-	NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
-	NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
-	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-	return [emailTest evaluateWithObject:checkString];
-}
-
 
 @end
