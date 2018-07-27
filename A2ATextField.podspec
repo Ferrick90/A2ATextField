@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'A2ATextField'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'A2ATextField class to float the Placeholder and validate the text while editing.'
 
 # This description is used to generate tags and improve search results.
