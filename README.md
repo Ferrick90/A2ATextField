@@ -93,7 +93,7 @@ self.textField.errorText = @"Please input a valid name"; // Default value is Err
 ```
 BOOL status = YES;
 
-if (!self.userTextField.validationSuccess) {
+if (!self.textField.validationSuccess) {
 	status = NO;
 }
 
