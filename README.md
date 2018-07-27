@@ -132,7 +132,7 @@ self.textField.placeholderInactiveColor = UIColor.gray.withAlphaComponent(0.7)
 #### Set Style
 ```
 // either A2ATextFieldStyle.email or A2ATextFieldStyle.none
-self.textField.style = email // Default value is A2ATextFieldStyle.none
+self.textField.style = .email // Default value is A2ATextFieldStyle.none
 ```
 
 #### Set mandatory
