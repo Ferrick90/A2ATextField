@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet A2ATextField *userTextField;
 @property (weak, nonatomic) IBOutlet A2ATextField *passTextField;
 @property (weak, nonatomic) IBOutlet A2ATextField *emailTextField;
+@property (weak, nonatomic) IBOutlet A2ATextField *addressTextField;
 @property (weak, nonatomic) IBOutlet UILabel *successLabel;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
