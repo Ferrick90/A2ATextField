@@ -36,6 +36,7 @@
 	if (self) {
 		[self setupView];
 		self.placeholder = self.placeholder;
+		self.font = self.font;
 	}
 	
 	return self;
@@ -50,6 +51,8 @@
 }
 
 - (void) setupView {
+	
+	self.style = A2ATextFieldStyleNone;
 	
 	errorColor = [UIColor colorWithRed:225.0/255.0 green:51.0/255.0 blue:40.0/255.0 alpha:1.0];
 	bottomBorderColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:0.4];
@@ -69,6 +72,8 @@
 	bottomLabel.font = [UIFont systemFontOfSize:11.0];
 	bottomLabel.textColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
 	bottomLabel.translatesAutoresizingMaskIntoConstraints = NO;
+	bottomLabel.numberOfLines = 0;
+	bottomLabel.lineBreakMode = NSLineBreakByWordWrapping;
 	bottomLabel.hidden = YES;
 	[self addSubview: bottomLabel];
 	
@@ -99,6 +104,11 @@
 	[self addTarget:self action:@selector(textFieldEdittingDidChangeInternal:) forControlEvents:UIControlEventEditingChanged];
 	[self addTarget:self action:@selector(textFieldEdittingDidEndInternal:) forControlEvents:UIControlEventEditingDidEnd];
 	
+}
+
+- (void) layoutSubviews {
+	[super layoutSubviews];
+	bottomLayer.frame = CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1.0);
 }
 
 #pragma mark - Access Method
@@ -132,7 +142,7 @@
 	if (bottomBorderOnly == YES) {
 		self.borderStyle = UITextBorderStyleNone;
 		
-		bottomLayer = [CALayer layer];
+		bottomLayer = [[CALayer alloc] init];
 		bottomLayer.borderColor = bottomBorderColor.CGColor;
 		bottomLayer.borderWidth = 1.0;
 		bottomLayer.frame = CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1.0);
@@ -148,8 +158,7 @@
 	}
 }
 
-- (void) setStyle:(A2ATextFieldStyle)style
-{
+- (void) setStyle:(A2ATextFieldStyle)style {
 	_style = style;
 }
 
