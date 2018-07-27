@@ -30,7 +30,7 @@
 	//self.userTextField.bottomBorderOnly = YES;
 	//self.userTextField.placeholderInactiveColor = [UIColor greenColor];
 	//self.userTextField.isMandatory = YES;
-	//self.userTextField.mandatoryText = @"Please input a valid name";
+	//self.userTextField.errorText = @"Please input a valid name";
 	
 	// userTextField custom right button
 	nameSuccessButton = [UIButton buttonWithType:UIButtonTypeCustom];

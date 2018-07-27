@@ -12,8 +12,7 @@ A2ATextField class to float the Placeholder and validate the text while editing.
 - [x] Change border style to bottom line
 - [x] Change placeholder active and inactive text color
 - [x] Mandatory option
-- [x] Change mandatory error text
-- [x] Show error text
+- [x] Show and change error text
 - [x] Validate the text while editing
 
 ## Example
@@ -32,7 +31,7 @@ pod 'A2ATextField'
 ```
 
 ## How to use
-####  Set placeholder
+#### Set placeholder
 ```
 self.textField.placeholder = @"Name*"; // Default is nil
 ```
@@ -52,6 +51,12 @@ self.textField.placeholderActiveColor = [UIColor colorWithRed:38/255.0 green:108
 self.textField.placeholderInactiveColor = [[UIColor grayColor] colorWithAlphaComponent:0.7];
 ```
 
+#### Set Style
+```
+// either A2ATextFieldStyleEmail or A2ATextFieldStyleNone
+self.textField.style = A2ATextFieldStyleEmail; // Default value is A2ATextFieldStyleNone
+```
+
 #### Set mandatory
 ```
 self.textField.isMandatory = YES; // Default value is NO
@@ -59,27 +64,29 @@ self.textField.isMandatory = YES; // Default value is NO
 
 #### Change mandatory error message
 ```
-self.textField.mandatoryText = @"Please input a valid name"; // Default value is Error
+self.textField.errorText = @"Please input a valid name"; // Default value is Error
 ```
 
 #### Show error text
+##### 1) show default error text
 ```
-[self.textField errorMessage:@"Please input a valid name"];
+[self.userTextField error];
+```
+##### 2) show cutom error text
+```
+[self.textField error:@"Please input a valid name"];
 ```
 
 #### Validate the text while editing
-##### 1) Set delegate
 ```
-self.textField.delegate = self;
-```
-
-##### 2) Set validationBlock
-```
-- (void) validationBlock:(UITextField *)textField {
-	if (textField.text.length < 6 && textField.tag == 1) {
-		[self.textField errorMessage:@"Passwords must be at least 8 characters in length"];
+[self.textField setValidationBlock:^(A2ATextField *textField) {
+	if (textField.text.length < 8) {
+		[self.textField error];
+		return NO; // error
 	}
-}
+
+	return YES; // success
+}];
 ```
 
 ## Author
